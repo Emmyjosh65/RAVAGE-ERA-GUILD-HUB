@@ -1,6 +1,7 @@
 /* ============================================================
    RAVAGE ERA — GUILD HUB  |  main.js
    Hash-router SPA + tryouts + spin + likes + gallery + contact
+   Images live next to index.html (no assets/ folder)
    ============================================================ */
 (function () {
   'use strict';
@@ -12,14 +13,14 @@
   var GUILD_EMAIL = 'ge5853987@gmail.com';
 
   var ASSETS = [
-    { src: 'assets/ravage-profile-01.png', label: 'RAVAGE ERA PROFILE 01' },
-    { src: 'assets/ravage-profile-02.png', label: 'RAVAGE ERA PROFILE 02' },
-    { src: 'assets/ravage-profile-03.png', label: 'RAVAGE ERA PROFILE 03' },
-    { src: 'assets/ravage-profile-04.png', label: 'RAVAGE ERA PROFILE 04' },
-    { src: 'assets/ravage-profile-05.png', label: 'RAVAGE ERA PROFILE 05' },
-    { src: 'assets/ravage-guild.png',     label: 'RAVAGE ERA GUILD' },
-    { src: 'assets/ravage-profile-07.png', label: 'RAVAGE ERA PROFILE 07' },
-    { src: 'assets/ravage-profile-08.png', label: 'RAVAGE ERA PROFILE 08' }
+    { src: 'ravage-profile-01.png', label: 'RAVAGE ERA PROFILE 01' },
+    { src: 'ravage-profile-02.png', label: 'RAVAGE ERA PROFILE 02' },
+    { src: 'ravage-profile-03.png', label: 'RAVAGE ERA PROFILE 03' },
+    { src: 'ravage-profile-04.png', label: 'RAVAGE ERA PROFILE 04' },
+    { src: 'ravage-profile-05.png', label: 'RAVAGE ERA PROFILE 05' },
+    { src: 'ravage-guild.png',     label: 'RAVAGE ERA GUILD' },
+    { src: 'ravage-profile-07.png', label: 'RAVAGE ERA PROFILE 07' },
+    { src: 'ravage-profile-08.png', label: 'RAVAGE ERA PROFILE 08' }
   ];
 
   var ADMINS = [
@@ -117,7 +118,7 @@
     document.body.classList.remove('modal-open');
   }
 
-  /* ---------------- Image fallback (missing assets) ---------------- */
+  /* ---------------- Image fallback (missing images) ---------------- */
 
   function fallbackSrc(label) {
     var t = encodeURIComponent(label || 'GUILD HUB');
