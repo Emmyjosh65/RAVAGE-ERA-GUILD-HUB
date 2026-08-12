@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAVAGE ERA — GUILD HUB</title>
+<meta name="description" content="RAVAGE ERA Guild Hub — the official community hub for the RAVAGE ERA Free Fire guild. Tryouts, guild info, admins, community services and more.">
+<meta name="theme-color" content="#06070a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='10' fill='%2306070a'/%3E%3Ctext x='32' y='42' font-family='Arial' font-size='26' font-weight='900' fill='%23f5c542' text-anchor='middle'%3ERE%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- Loading splash -->
+<div class="loader" id="loader">
+  <div class="loader-emblem">RE</div>
+  <div class="loader-ring"></div>
+  <p>RAVAGE ERA</p>
+</div>
+
+<!-- Particles background -->
+<canvas id="fx" aria-hidden="true"></canvas>
+
+<div class="app">
+
+  <!-- ============ SIDEBAR (DESKTOP) ============ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-badge">RE</div>
+      <div class="brand-text">
+        <strong>RAVAGE ERA</strong>
+        <span>GUILD HUB</span>
+      </div>
+    </div>
+    <nav class="side-nav" aria-label="Main navigation">
+      <a class="nav-link" href="#/home" data-route="home">HOME</a>
+      <a class="nav-link" href="#/tryouts" data-route="tryouts">TRYOUTS</a>
+      <a class="nav-link" href="#/guild" data-route="guild">GUILD</a>
+      <a class="nav-link" href="#/admins" data-route="admins">ADMINS</a>
+      <a class="nav-link" href="#/spin" data-route="spin">SPIN &amp; WIN</a>
+      <a class="nav-link" href="#/likes" data-route="likes">LIKES &amp; VISITS</a>
+      <a class="nav-link" href="#/gallery" data-route="gallery">GALLERY</a>
+      <a class="nav-link" href="#/contact" data-route="contact">CONTACT</a>
+    </nav>
+    <div class="sidebar-foot">
+      <span>BUILT BY EMMEX / ZEUS</span>
+      <small>WEB DEVELOPER</small>
+    </div>
+  </aside>
+  <div class="nav-backdrop" id="navBackdrop"></div>
+
+  <div class="main-wrap">
+
+    <!-- ============ MOBILE TOPBAR ============ -->
+    <header class="topbar">
+      <div class="brand brand-sm">
+        <div class="brand-badge">RE</div>
+        <div class="brand-text"><strong>RAVAGE ERA</strong><span>GUILD HUB</span></div>
+      </div>
+      <button class="hamburger" id="menuBtn" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </header>
+
+    <main id="app">
+
+      <!-- ================= TRYOUTS (FIRST PAGE) ================= -->
+      <section class="page active" id="page-tryouts" data-page="tryouts">
+        <div class="page-inner">
+
+          <div class="panel hero-panel" id="tryoutHero">
+            <div class="hero-tag">GUILD RECRUITMENT PORTAL</div>
+            <h1 class="glow-gold">RAVAGE ERA</h1>
+            <h2>GUILD TRYOUTS</h2>
+            <p class="hero-quote">“Think you have what it takes to join RAVAGE ERA?”</p>
+            <p class="hero-desc">RAVAGE ERA is a competitive Free Fire guild built around teamwork, loyalty, skill, respect and consistency. If you believe you can represent the guild, submit your details and our administrators will review your application.</p>
+            <button class="btn btn-gold btn-lg" id="btnStartTryout">START TRYOUT</button>
+            <div class="hud-line"></div>
+          </div>
+
+          <div class="panel form-panel" id="tryoutFormPanel" hidden>
+            <div class="panel-head">
+              <h3>TRYOUT APPLICATION</h3>
+              <span class="step-label">STEP 1 / 2</span>
+            </div>
+            <form id="tryoutForm" novalidate>
+              <div class="field">
+                <label for="tryoutName">IN-GAME NAME <i>*</i></label>
+                <input type="text" id="tryoutName" placeholder="Enter your Free Fire name" autocomplete="off">
+                <small class="err" id="errTryoutName"></small>
+              </div>
+              <div class="field">
+                <label for="tryoutUid">UID <i>*</i></label>
+                <input type="text" id="tryoutUid" placeholder="Enter your UID" autocomplete="off">
+                <small class="err" id="errTryoutUid"></small>
+              </div>
+              <div class="field">
+                <label for="tryoutEmail">EMAIL <span class="opt">(OPTIONAL)</span></label>
+                <input type="email" id="tryoutEmail" placeholder="Enter your email" autocomplete="off">
+                <small class="err" id="errTryoutEmail"></small>
+              </div>
+              <div class="field">
+                <label for="tryoutPhone">PHONE NUMBER <i>*</i></label>
+                <input type="tel" id="tryoutPhone" placeholder="Enter WhatsApp number" autocomplete="off">
+                <small class="err" id="errTryoutPhone"></small>
+              </div>
+              <div class="field">
+                <label>PROFILE PHOTO <i>*</i></label>
+                <label class="file-drop" for="tryoutPhoto">
+                  <input type="file" id="tryoutPhoto" accept="image/*" hidden>
+                  <span class="file-drop-icon">+</span>
+                  <span class="file-drop-text" id="tryoutPhotoName">Upload Profile</span>
+                </label>
+                <div class="preview-wrap" id="tryoutPhotoPreviewWrap" hidden>
+                  <img id="tryoutPhotoPreview" alt="Profile photo preview">
+                  <button type="button" class="preview-remove" id="tryoutPhotoClear" aria-label="Remove photo">✕</button>
+                </div>
+                <small class="err" id="errTryoutPhoto"></small>
+                <small class="hint">Preview is local only — no server upload.</small>
+              </div>
+              <div class="form-actions">
+                <button type="button" class="btn btn-ghost" id="btnTryoutBack">BACK</button>
+                <button type="submit" class="btn btn-gold">CONTINUE</button>
+              </div>
+            </form>
+          </div>
+
+          <div class="panel admin-panel" id="tryoutAdminPanel" hidden>
+            <div class="panel-head">
+              <h3>CHOOSE AN ADMIN</h3>
+              <span class="step-label">STEP 2 / 2</span>
+            </div>
+            <p class="panel-sub">Select the administrator who will review your application. WhatsApp will open with your application message pre-filled — press <strong>Send</strong> to complete your submission.</p>
+            <div class="admin-grid" id="tryoutAdminGrid"></div>
+            <div class="form-actions">
+              <button class="btn btn-ghost" id="btnAdminBack">BACK</button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ================= HOME / DASHBOARD ================= -->
+      <section class="page" id="page-home" data-page="home">
+        <div class="page-inner">
+          <div class="page-head">
+            <a class="page-back" href="#/tryouts">← TRYOUTS</a>
+            <span class="page-tag">COMMUNITY DASHBOARD</span>
+          </div>
+          <div class="panel hero-panel dash-hero">
+            <h1 class="glow-gold">RAVAGE ERA</h1>
+            <p class="hero-desc">Welcome to the official community hub.</p>
+            <p class="hero-quote">“Built by warriors. United by RAVAGE.”</p>
+          </div>
+          <div class="dash-grid" id="dashGrid"></div>
+          <div class="dash-extra">
+            <a class="btn btn-ghost" href="#/profiles">VIEW PROFILE SHOWCASE →</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= GUILD ================= -->
+      <section class="page" id="page-guild" data-page="guild">
+        <div class="page-inner">
+          <div class="page-head">
+            <a class="page-back" href="#/home">← HOME</a>
+            <span class="page-tag">ABOUT US</span>
+          </div>
+          <div class="panel hero-panel guild-hero">
+            <h1>RAVAGE ERA</h1>
+            <h2>THE GUILD</h2>
+            <p class="hero-quote">“Built by warriors. United by RAVAGE.”</p>
+          </div>
+
+          <article class="panel prose">
+            <h3>WHO WE ARE</h3>
+            <p>RAVAGE ERA is a competitive Free Fire guild built around a single idea: that a group of dedicated players, bound by trust and respect, can achieve more together than any individual ever could alone. We are not just a team that queues into ranked matches together — we are a community that trains together, grows together and represents each other in every lobby we enter.</p>
+
+            <h3>TEAMWORK &amp; LOYALTY</h3>
+            <p>At the heart of RAVAGE ERA is teamwork. Every member understands that victory in Free Fire is never earned by one player alone — it is built on callouts, coordination, covering each other's flanks and trusting the plan. Loyalty means showing up: for scrims, for squad sessions, for your teammates when a fight goes wrong. Our members are expected to be reliable, respectful and committed to the guild they represent.</p>
+
+            <h3>COMPETITION &amp; SKILL</h3>
+            <p>RAVAGE ERA is built around competitive Free Fire. We practice squad coordination, study rotations, drops and end-game zone play, and we constantly push each other to improve. Skill is respected in RAVAGE ERA — but skill without discipline means nothing. We value players who are hungry to learn as much as players who already perform.</p>
+
+            <h3>FRIENDSHIP &amp; RESPECT</h3>
+            <p>Beyond the rankings and the fights, RAVAGE ERA is a place where friendships are formed. We believe the best squads are the ones where players genuinely enjoy playing together. Respect is non-negotiable: respect for the guild, respect for your teammates and respect for opponents. Toxic behavior has no place here.</p>
+
+            <h3>DISCIPLINE &amp; GROWTH</h3>
+            <p>Discipline is what separates a casual group from a real guild. Members are expected to follow the guild's direction, attend guild activities when possible and represent the RAVAGE ERA name with pride in every match. Growth is a constant goal — we improve individually so that we can improve together, and we celebrate every member's progress.</p>
+
+            <h3>HELPING NEWER PLAYERS</h3>
+            <p>RAVAGE ERA believes the guild grows stronger when everyone gets a chance to develop. Experienced members actively help newer players learn the game — sharing strategies, coaching rotations, reviewing mistakes and creating an environment where asking questions is always welcome. Nobody is left behind.</p>
+
+            <h3>GUILD ACTIVITIES</h3>
+            <p>The guild stays active through squad sessions, practice matches, tryout events and community activities. These events keep the community connected and give every member a reason to be part of the team — not just as a name on a roster, but as an active contributor to the RAVAGE ERA family.</p>
+
+            <h3>OUR COMMUNITY</h3>
+            <p>RAVAGE ERA is more than a roster — it is a community of players who share the same passion for the game and the same standards of conduct. From the Guild Leader to the newest recruit, everyone plays a part in keeping the guild strong, welcoming and competitive.</p>
+
+            <h3>REPRESENTING RAVAGE ERA</h3>
+            <p>When you wear the RAVAGE ERA name, you carry it with you into every lobby. We expect our members to play with pride, act with honor and always remember what the guild stands for: teamwork, loyalty, skill, respect and consistency. This is what we are building — and we want warriors who are ready to build it with us.</p>
+          </article>
+
+          <div class="cta-row">
+            <a class="btn btn-gold" href="#/tryouts">START TRYOUT</a>
+            <a class="btn btn-ghost" href="#/admins">MEET THE ADMINS</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= ADMINS ================= -->
+      <section class="page" id="page-admins" data-page="admins">
+        <div class="page-inner">
+          <div class="page-head">
+            <a class="page-back" href="#/home">← HOME</a>
+            <span class="page-tag">LEADERSHIP</span>
+          </div>
+          <div class="panel hero-panel">
+            <h1>MEET THE ADMINS</h1>
+            <h2>RAVAGE ERA LEADERSHIP</h2>
+            <p class="hero-desc">The administrators who guide, protect and represent the RAVAGE ERA community.</p>
+          </div>
+          <div class="admin-grid" id="adminsGrid"></div>
+        </div>
+      </section>
+
+      <!-- ================= SPIN & WIN ================= -->
+      <section class="page" id="page-spin" data-page="spin">
+        <div class="page-inner">
+          <div class="page-head">
+            <a class="page-back" href="#/home">← HOME</a>
+            <span class="page-tag">COMMUNITY PROMOTION</span>
+          </div>
+          <div class="panel hero-panel">
+            <h1 class="glow-gold">SPIN &amp; WIN</h1>
+            <h2>RAVAGE ERA REWARD WHEEL</h2>
+            <p class="hero-desc">Community promotion · ₦4,000 / $2</p>
+            <p class="notice">This is a <strong>RAVAGE ERA community promotion/service</strong>. Garena / Free Fire does not officially guarantee these rewards, and this website does not directly modify Free Fire accounts.</p>
+          </div>
+
+          <!-- Stage 1 : ACCESS GATE -->
+          <div class="panel form-panel spin-stage" id="spinGate">
+            <div class="panel-head"><h3>SPIN ACCESS</h3><span class="step-label">ACCESS GATE</span></div>
+            <p class="panel-sub">Enter your Free Fire UID and the community secret code to unlock the wheel.</p>
+            <div class="field">
+              <label for="spinUid">IN-GAME UID <i>*</i></label>
+              <input type="text" id="spinUid" placeholder="Enter your UID" autocomplete="off">
+              <small class="err" id="errSpinUid"></small>
+            </div>
+            <div class="field">
+              <label for="spinCode">SECRET CODE <i>*</i></label>
+              <input type="password" id="spinCode" placeholder="Enter secret code" autocomplete="off">
+              <small class="err" id="errSpinCode"></small>
+            </div>
+            <div class="form-actions">
+              <button class="btn btn-gold btn-block" id="btnSpinUnlock">UNLOCK</button>
+            </div>
+            <small class="hint">Simple client-side access gate — not secure authentication.</small>
+          </div>
+
+          <!-- Stage 2 : WHEEL -->
+          <div class="panel form-panel spin-stage" id="spinWheel" hidden>
+            <div class="panel-head"><h3>THE WHEEL</h3><span class="step-label">SPIN</span></div>
+            <div class="prize-row">
+              <div class="prize-card"><span class="prize-icon">🎭</span><span>EMOTE</span></div>
+              <div class="prize-card"><span class="prize-icon">🎫</span><span>BOOYAH PASS</span></div>
+              <div class="prize-card"><span class="prize-icon">🔫</span><span>GUN SKIN</span></div>
+            </div>
+            <div class="reels" id="spinReels" aria-hidden="true">
+              <div class="reel"><div class="reel-track"></div></div>
+              <div class="reel"><div class="reel-track"></div></div>
+              <div class="reel"><div class="reel-track"></div></div>
+            </div>
+            <div class="form-actions">
+              <button class="btn btn-gold btn-lg btn-block" id="btnSpinStart">SPIN NOW</button>
+            </div>
+            <div class="spin-result" id="spinResult" hidden>
+              <div class="result-badge">★ RAVAGE ERA PROMOTION RESULT ★</div>
+              <div class="result-icon">🔫</div>
+              <h4 class="glow-gold">GUN SKIN</h4>
+              <p class="notice">Demo promotion result for the RAVAGE ERA community event. The Free Fire game server has <strong>not</strong> been modified or notified — this is a community reward process handled outside the game.</p>
+              <button class="btn btn-red btn-lg" id="btnSpinClaim">CONTINUE TO CLAIM →</button>
+            </div>
+          </div>
+
+          <!-- Stage 3 : CLAIM / ZEUS SUBMISSION -->
+          <div class="panel form-panel spin-stage" id="spinClaim" hidden>
+            <div class="panel-head"><h3>GUN SKIN PROMOTION</h3><span class="step-label">CLAIM</span></div>
+            <div class="field">
+              <label for="claimUid">FREE FIRE UID <i>*</i></label>
+              <input type="text" id="claimUid" placeholder="Enter your UID" autocomplete="off">
+              <small class="err" id="errClaimUid"></small>
+            </div>
+            <div class="form-actions">
+              <button class="btn btn-gold" id="btnSpinShowResult">SHOW RESULT</button>
+            </div>
+            <div class="spin-result" id="spinResultCard" hidden>
+              <div class="result-badge">★ RAVAGE ERA PROMOTION RESULT ★</div>
+              <div class="result-icon">🔫</div>
+              <h4 class="glow-gold">GUN SKIN</h4>
+              <p>Take a screenshot of your result and upload it below.</p>
+            </div>
+            <div class="field" id="shotField" hidden>
+              <label>RESULT SCREENSHOT <i>*</i></label>
+              <label class="file-drop" for="spinShot">
+                <input type="file" id="spinShot" accept="image/*" hidden>
+                <span class="file-drop-icon">+</span>
+                <span class="file-drop-text" id="spinShotName">Upload Screenshot</span>
+              </label>
+              <div class="preview-wrap" id="spinShotPreviewWrap" hidden>
+                <img id="spinShotPreview" alt="Result screenshot preview">
+              </div>
+              <small class="err" id="errSpinShot"></small>
+              <small class="hint" id="spinShotHint">Screenshot preview is local only.</small>
+            </div>
+            <div class="form-actions">
+              <button class="btn btn-ghost" id="btnSpinBack">BACK</button>
+              <button class="btn btn-gold" id="btnSpinUpload" disabled>UPLOAD SCREENSHOT</button>
+            </div>
+            <div class="form-actions" id="spinContinueRow" hidden>
+              <button class="btn btn-red btn-lg btn-block" id="btnSpinContinue">CONTINUE</button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ================= LIKES & VISITS ================= -->
+      <section class="page" id="page-likes" data-page="likes">
+        <div class="page-inner">
+          <div class="page-head">
+            <a class="page-back" href="#/home">← HOME</a>
+            <span class="page-tag">COMMUNITY SERVICE</span>
+          </div>
+          <div class="panel hero-panel">
+            <h1>LIKES &amp; PROFILE VISITS</h1>
+            <h2>FREE FIRE COMMUNITY SERVICE</h2>
+            <p class="hero-desc">Submit your Free Fire UID for the RAVAGE ERA community service request.</p>
+            <p class="notice">This website does not add likes or visits to Free Fire accounts itself. Your request is submitted to the RAVAGE ERA web developer / admin for handling.</p>
+          </div>
+
+          <div class="panel form-panel likes-stage" id="likesGate">
+            <div class="panel-head"><h3>REQUEST ACCESS</h3><span class="step-label">UNLOCK</span></div>
+            <div class="field">
+              <label for="likesUid">FREE FIRE UID <i>*</i></label>
+              <input type="text" id="likesUid" placeholder="Enter your UID" autocomplete="off">
+              <small class="err" id="errLikesUid"></small>
+            </div>
+            <div class="field">
+              <label for="likesCode">SECRET CODE <i>*</i></label>
+              <input type="password" id="likesCode" placeholder="Enter secret code" autocomplete="off">
+              <small class="err" id="errLikesCode"></small>
+            </div>
+            <div class="form-actions">
+              <button class="btn btn-gold btn-block" id="btnLikesUnlock">UNLOCK</button>
+            </div>
+            <small class="hint">Simple client-side access gate — not secure authentication.</small>
+          </div>
+
+          <div class="panel form-panel likes-stage" id="likesConfirm" hidden>
+            <div class="panel-head"><h3>REQUEST SUMMARY</h3><span class="step-label">CONFIRM</span></div>
+            <div class="summary-card">
+              <p><span>UID</span><strong id="likesSummaryUid">—</strong></p>
+              <p><span>Service requested</span><strong>Free Fire Likes &amp; Profile Visits</strong></p>
+            </div>
+            <p class="panel-sub">Press CONTINUE to open WhatsApp with your request prepared for <strong>EMMEX / ZEUS (Web Developer)</strong> — then press Send in WhatsApp.</p>
+            <div class="form-actions">
+              <button class="btn btn-ghost" id="btnLikesBack">BACK</button>
+              <button class="btn btn-gold" id="btnLikesContinue">CONTINUE</button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ================= GALLERY ================= -->
+      <section class="page" id="page-gallery" data-page="gallery">
+        <div class="page-inner">
+          <div class="page-head">
+            <a class="page-back" href="#/home">← HOME</a>
+            <span class="page-tag">MEDIA</span>
+          </div>
+          <div class="panel hero-panel">
+            <h1>RAVAGE ERA</h1>
+            <h2>GALLERY</h2>
+            <div class="cta-row">
+              <a class="btn btn-gold" href="#/profiles">VIEW PROFILE SHOWCASE →</a>
+            </div>
+          </div>
+
+          <div class="panel gallery-panel">
+            <div class="gallery-main" id="galMain">
+              <button class="gal-btn" id="btnGalPrev" aria-label="Previous image">‹</button>
+              <figure>
+                <img id="galFeatured" alt="RAVAGE ERA gallery image">
+                <figcaption id="galLabel">—</figcaption>
+              </figure>
+              <button class="gal-btn" id="btnGalNext" aria-label="Next image">›</button>
+              <div class="gal-counter" id="galCounter">1 / 8</div>
+              <button class="btn btn-ghost btn-sm gal-full" id="btnGalFull">FULLSCREEN ⛶</button>
+            </div>
+            <div class="gal-thumbs" id="galThumbs"></div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ================= PROFILES ================= -->
+      <section class="page" id="page-profiles" data-page="profiles">
+        <div class="page-inner">
+          <div class="page-head">
+            <a class="page-back" href="#/gallery">← GALLERY</a>
+            <span class="page-tag">SHOWCASE</span>
+          </div>
+          <div class="panel hero-panel">
+            <h1>RAVAGE ERA</h1>
+            <h2>PROFILES</h2>
+            <p class="hero-desc">Showcase cards from the RAVAGE ERA community.</p>
+          </div>
+          <div class="profiles-grid" id="profilesGrid"></div>
+        </div>
+      </section>
+
+      <!-- ================= CONTACT ================= -->
+      <section class="page" id="page-contact" data-page="contact">
+        <div class="page-inner">
+          <div class="page-head">
+            <a class="page-back" href="#/home">← HOME</a>
+            <span class="page-tag">SUPPORT</span>
+          </div>
+          <div class="panel hero-panel">
+            <h1>CONTACT</h1>
+            <h2>RAVAGE ERA</h2>
+            <p class="hero-desc">Questions, queries or support — reach the guild your way.</p>
+          </div>
+
+          <div class="contact-grid">
+            <!-- OPTION A : EMAIL -->
+            <div class="panel form-panel">
+              <div class="panel-head"><h3>OPTION A — EMAIL</h3><span class="step-label">MAIL</span></div>
+              <form id="emailForm" novalidate>
+                <div class="field">
+                  <label for="cName">NAME <i>*</i></label>
+                  <input type="text" id="cName" placeholder="Your name" autocomplete="off">
+                  <small class="err" id="errCName"></small>
+                </div>
+                <div class="field">
+                  <label for="cEmail">EMAIL <i>*</i></label>
+                  <input type="email" id="cEmail" placeholder="Your email" autocomplete="off">
+                  <small class="err" id="errCEmail"></small>
+                </div>
+                <div class="field">
+                  <label for="cMessage">MESSAGE <i>*</i></label>
+                  <textarea id="cMessage" rows="5" placeholder="Your message"></textarea>
+                  <small class="err" id="errCMessage"></small>
+                </div>
+                <div class="form-actions">
+                  <button type="submit" class="btn btn-gold btn-block" id="btnSendEmail">SEND QUERY</button>
+                </div>
+                <small class="hint">Opens your email app with the message pre-filled (static site — no server email).</small>
+              </form>
+            </div>
+
+            <!-- OPTION B : WHATSAPP -->
+            <div class="panel form-panel">
+              <div class="panel-head"><h3>OPTION B — WHATSAPP</h3><span class="step-label">WA</span></div>
+              <form id="waForm" novalidate>
+                <div class="field">
+                  <label for="wName">NAME <i>*</i></label>
+                  <input type="text" id="wName" placeholder="Your name" autocomplete="off">
+                  <small class="err" id="errWName"></small>
+                </div>
+                <div class="field">
+                  <label for="wPhone">PHONE NUMBER <i>*</i></label>
+                  <input type="tel" id="wPhone" placeholder="Your phone number" autocomplete="off">
+                  <small class="err" id="errWPhone"></small>
+                </div>
+                <div class="field">
+                  <label for="wMessage">MESSAGE <i>*</i></label>
+                  <textarea id="wMessage" rows="5" placeholder="Your message"></textarea>
+                  <small class="err" id="errWMessage"></small>
+                </div>
+                <div class="form-actions">
+                  <button type="submit" class="btn btn-red btn-block" id="btnContactZeus">CONTACT ZEUS ON WHATSAPP</button>
+                </div>
+                <small class="hint">Opens WhatsApp with your message pre-filled — press Send there.</small>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="site-foot">
+      <p><strong>RAVAGE ERA GUILD HUB</strong> · “Built by warriors. United by RAVAGE.”</p>
+      <p>Built by <a href="https://wa.me/2349066760078" target="_blank" rel="noopener">EMMEX / ZEUS</a> — Web Developer · <a href="mailto:ge5853987@gmail.com">ge5853987@gmail.com</a></p>
+      <p class="foot-note">Fan-made community platform. Free Fire is a trademark of Garena. Not affiliated with or endorsed by Garena.</p>
+    </footer>
+
+  </div>
+</div>
+
+<!-- ============ MODALS ============ -->
+
+<!-- TRYOUT SUCCESS -->
+<div class="modal" id="modalTryoutSuccess" role="dialog" aria-modal="true" aria-labelledby="tryoutModalTitle">
+  <div class="modal-card panel">
+    <div class="modal-check">✔</div>
+    <h3 id="tryoutModalTitle" class="glow-gold">APPLICATION READY</h3>
+    <p>Congratulations on completing your RAVAGE ERA tryout submission!</p>
+    <p>Your application details have been prepared for the administrator you selected.</p>
+    <p>Please send the prepared WhatsApp message and wait for the admin to review your application.</p>
+    <p class="modal-quote">“Good luck with your tryouts. We hope to see you representing RAVAGE ERA.”</p>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" id="btnTryoutClose">CLOSE</button>
+      <button class="btn btn-gold" id="btnTryoutViewGuild">VIEW GUILD</button>
+    </div>
+  </div>
+</div>
+
+<!-- GALLERY FULLSCREEN -->
+<div class="modal modal-dark" id="modalGallery" role="dialog" aria-modal="true">
+  <div class="modal-full">
+    <button class="modal-close" id="btnGalModalClose" aria-label="Close fullscreen">✕</button>
+    <img id="galModalImg" alt="RAVAGE ERA gallery fullscreen">
+    <p class="gal-modal-label" id="galModalLabel">—</p>
+  </div>
+</div>
+
+<!-- PROFILE VIEW -->
+<div class="modal modal-dark" id="modalProfile" role="dialog" aria-modal="true">
+  <div class="modal-full">
+    <button class="modal-close" id="btnProfModalClose" aria-label="Close profile">✕</button>
+    <img id="profModalImg" alt="RAVAGE ERA profile">
+    <p class="gal-modal-label" id="profModalLabel">—</p>
+  </div>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>
